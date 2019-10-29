@@ -1,19 +1,7 @@
 import React from 'react';
 import Cell from './Cell'
 
-function Board() {
-  const [boardContent, setBoardContent] = React.useState([
-    '', '', '',
-    '', '', '',
-    '', '', ''
-  ])
-
-  const updateBoardAtIndex = (index) => {
-    const copyOfBoard = [...boardContent]
-    copyOfBoard[index] = 'X'
-    setBoardContent(copyOfBoard)
-  }
-
+function Board({ boardContent, updateBoardAtIndex }) {
   return (
     <>
       <div style={{
@@ -35,15 +23,6 @@ function Board() {
             )
           })
         }
-      </div>
-      <div
-        onClick={() => {
-          const copyOfBoard = [...boardContent]
-          copyOfBoard[0] = 'X'
-          setBoardContent(copyOfBoard)
-        }}
-      >
-        Demonstration of update function
       </div>
     </>
   )
