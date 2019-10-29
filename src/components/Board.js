@@ -1,30 +1,52 @@
 import React from 'react';
-import Cells from './Cells'
+import Cell from './Cell'
 
 function Board() {
-    const [boardContent, setBoardContent] = React.useState([
-        ['', '', ''],
-        ['', '', ''],
-        ['', '', ''],
-    ])
+  const [boardContent, setBoardContent] = React.useState([
+    '', '', '',
+    '', '', '',
+    '', '', ''
+  ])
 
-    return(
-        <div style={{  
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 100px)',
-            gridTemplateRows: 'repeat(3, 100px)'
-            }}>
-                <Cells content={boardContent[0][0]}/>
-                <Cells content={boardContent[0][1]}/>
-                <Cells content={boardContent[0][2]}/>
-                <Cells content={boardContent[1][0]}/>
-                <Cells content={boardContent[1][1]}/>
-                <Cells content={boardContent[1][2]}/>
-                <Cells content={boardContent[2][0]}/>
-                <Cells content={boardContent[2][1]}/>
-                <Cells content={boardContent[2][2]}/>
-        </div>
-    )
+  const updateBoardAtIndex = (index) => {
+    const copyOfBoard = [...boardContent]
+    copyOfBoard[index] = 'X'
+    setBoardContent(copyOfBoard)
+  }
+
+  return (
+    <>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(3, 100px)',
+        gridTemplateRows: 'repeat(3, 100px)'
+      }}>
+        {
+          boardContent.map((cellContent, index) => {
+            return (
+              <Cell
+                // have to give each element a unique key when using map
+                key={index}
+
+                content={cellContent}
+                index={index}
+                updateForGivenIndex={updateBoardAtIndex}
+              />
+            )
+          })
+        }
+      </div>
+      <div
+        onClick={() => {
+          const copyOfBoard = [...boardContent]
+          copyOfBoard[0] = 'X'
+          setBoardContent(copyOfBoard)
+        }}
+      >
+        Demonstration of update function
+      </div>
+    </>
+  )
 }
 
 export default Board;
