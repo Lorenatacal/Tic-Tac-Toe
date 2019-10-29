@@ -1,6 +1,9 @@
 import React from 'react';
 
-function Cell({ boardContent }) {
+function Cell(props) {
+
+    const  { content } = props;
+
     return(
         <button
             style={{ 
@@ -8,7 +11,7 @@ function Cell({ boardContent }) {
                 height: '100px',
                 width: '100px'
             }}>
-            {boardContent}
+            {content}
         </button>
     )
 }
